@@ -16,14 +16,15 @@ function App() {
   return (
     <Dropdown
       multiple
+      label="Select options"
       searchable
       options={options}
+      className="w-100"
       value={value}
       onChange={(v) => setValue(v as string[])}
-      renderOption={(option, state) => (
+      renderOption={(option) => (
         <div className="flex justify-between">
           <span>{option.label}</span>
-          {state.selected && <span>✓</span>}
         </div>
       )}
     />

@@ -13,6 +13,7 @@ export type RenderOptionState = {
 
 export type DropDownProps = {
   className?: string;
+  label?: string;
   options: DropdownOptions[];
   value: string | string[];
   onChange: (value: string | string[]) => void;

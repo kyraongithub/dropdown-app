@@ -17,7 +17,7 @@ export function DropdownOptionItem({
         "px-3 py-2 text-sm",
         disabled ? "cursor-not-allowed text-gray-400" : "cursor-pointer",
         highlighted && "bg-gray-100",
-        selected && !disabled && "bg-blue-50",
+        selected && !disabled && "bg-green-50",
       )}
     >
       {renderOption

@@ -15,9 +15,9 @@ export function Dropdown(props: DropDownProps) {
     multiple = false,
     searchable = false,
     usePortal = true,
-    placeholder = "Select...",
     renderOption,
     className,
+    label,
   } = props;
 
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -27,6 +27,7 @@ export function Dropdown(props: DropDownProps) {
     value,
     multiple,
     onChange,
+    options,
   });
 
   useOutsideClick([triggerRef, menuRef], dropdown.close, dropdown.isOpen);
@@ -36,26 +37,29 @@ export function Dropdown(props: DropDownProps) {
     .map((opt) => opt.label);
 
   return (
-    <div className={clsx("relative inline-block w-full", className)}>
-      <DropdownTrigger
-        ref={triggerRef}
-        labels={selectedLabels}
-        placeholder={placeholder}
-        onClick={dropdown.toggle}
-      />
+    <div className={clsx("relative gap-3 w-full flex items-center", className)}>
+      <p className="whitespace-nowrap shrink-0">{label ? label : "label"}</p>
+      <>
+        <DropdownTrigger
+          ref={triggerRef}
+          labels={selectedLabels}
+          onClick={dropdown.toggle}
+          onDeselect={dropdown.deselect}
+        />
 
-      <DropdownMenu
-        menuRef={menuRef}
-        anchorRef={triggerRef}
-        options={options}
-        selectedValues={dropdown.selectedValues}
-        isOpen={dropdown.isOpen}
-        multiple={multiple}
-        searchable={searchable}
-        usePortal={usePortal}
-        renderOption={renderOption}
-        onSelect={dropdown.selectValue}
-      />
+        <DropdownMenu
+          menuRef={menuRef}
+          anchorRef={triggerRef}
+          options={options}
+          selectedValues={dropdown.selectedValues}
+          isOpen={dropdown.isOpen}
+          multiple={multiple}
+          searchable={searchable}
+          usePortal={usePortal}
+          renderOption={renderOption}
+          onSelect={dropdown.selectValue}
+        />
+      </>
     </div>
   );
 }

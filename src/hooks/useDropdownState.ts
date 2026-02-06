@@ -1,12 +1,19 @@
 import { useCallback, useMemo, useState } from "react";
+import type { DropdownOptions } from "../components/UI/Dropdown";
 
 type Params = {
   value?: string | string[];
   multiple: boolean;
   onChange?: (value: string | string[]) => void;
+  options?: DropdownOptions[];
 };
 
-export function useDropdownState({ value, multiple, onChange }: Params) {
+export function useDropdownState({
+  value,
+  multiple,
+  onChange,
+  options,
+}: Params) {
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedValues = useMemo<string[]>(() => {
@@ -36,6 +43,14 @@ export function useDropdownState({ value, multiple, onChange }: Params) {
     [multiple, selectedValues, onChange],
   );
 
+  const deselect = (option: string) => {
+    const selectedOption = options?.find((o) => o.label === option);
+
+    if (selectedOption) {
+      selectValue(selectedOption.value);
+    }
+  };
+
   return {
     isOpen,
     selectedValues,
@@ -43,5 +58,6 @@ export function useDropdownState({ value, multiple, onChange }: Params) {
     close,
     toggle,
     selectValue,
+    deselect,
   };
 }

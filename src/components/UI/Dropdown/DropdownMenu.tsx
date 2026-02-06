@@ -40,14 +40,26 @@ export function DropdownMenu({
       )}
     >
       {searchable && (
-        <div className="border-b px-2 py-1">
+        <div className="border-b px-2 py-1 flex items-center">
+          <img
+            src="./icons/search.svg"
+            alt="search"
+            className="w-4 opacity-25"
+          />
           <input
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search..."
-            className="w-full rounded border px-2 py-1 text-sm focus:outline-none"
+            className="w-full bg-transparent px-2 py-1 text-sm border-0 outline-none focus:border-0 focus:outline-none focus:ring-0"
           />
+          {query !== "" && (
+            <img
+              src="./icons/cross.svg"
+              alt="search"
+              className="w-4 opacity-25 mr-4 cursor-pointer"
+              onClick={() => setQuery("")}
+            />
+          )}
         </div>
       )}
 
