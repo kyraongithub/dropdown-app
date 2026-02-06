@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { Dropdown } from "./components/UI/Dropdown";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [value, setValue] = useState<string[]>([]);
+
+  const options = [
+    { value: "1", label: "Option 1" },
+    { value: "2", label: "Option with Icon" },
+    { value: "3", label: "Long Long Option 3" },
+    { value: "4", label: "Long Long Long Option 4" },
+    { value: "5", label: "Long Long Long Long Option 5" },
+    { value: "6", label: "Long Long Long Long Long Option 6" },
+  ];
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Dropdown
+      multiple
+      searchable
+      options={options}
+      value={value}
+      onChange={(v) => setValue(v as string[])}
+      renderOption={(option, state) => (
+        <div className="flex justify-between">
+          <span>{option.label}</span>
+          {state.selected && <span>✓</span>}
+        </div>
+      )}
+    />
+  );
 }
 
-export default App
+export default App;
