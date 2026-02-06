@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import type { DropdownOptions } from "../components/UI/Dropdown";
+import type { DropdownOptions } from "../components/UI/Dropdown/types";
 
 type Params = {
   value?: string | string[];
@@ -8,12 +8,7 @@ type Params = {
   options?: DropdownOptions[];
 };
 
-export function useDropdownState({
-  value,
-  multiple,
-  onChange,
-  options,
-}: Params) {
+const useDropdownState = ({ value, multiple, onChange, options }: Params) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedValues = useMemo<string[]>(() => {
@@ -60,4 +55,6 @@ export function useDropdownState({
     selectValue,
     deselect,
   };
-}
+};
+
+export default useDropdownState;

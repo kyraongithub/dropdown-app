@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 
-export function useOutsideClick(
+export const useOutsideClick = (
   refs: React.RefObject<HTMLElement | null>[],
   handler: () => void,
   active: boolean,
-) {
+): void => {
   useEffect(() => {
     if (!active) return;
 
-    function onClick(e: MouseEvent) {
+    const onClick = (e: MouseEvent) => {
       const target = e.target as Node;
 
       const isInside = refs.some(
@@ -16,9 +16,9 @@ export function useOutsideClick(
       );
 
       if (!isInside) handler();
-    }
+    };
 
     document.addEventListener("mousedown", onClick);
     return () => document.removeEventListener("mousedown", onClick);
   }, [refs, handler, active]);
-}
+};

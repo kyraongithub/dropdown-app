@@ -2,12 +2,12 @@ import { useRef } from "react";
 import clsx from "clsx";
 
 import { DropdownTrigger } from "./DropdownTrigger";
-import { DropdownMenu } from "./DropdownMenu";
-import { useDropdownState } from "../../../hooks/useDropdownState";
+import DropdownMenu from "./DropdownMenu";
+import useDropdownState from "../../../hooks/useDropdownState";
 import { useOutsideClick } from "../../../hooks/useOutsideClick";
-import { type DropDownProps } from "./types";
+import type { DropDownProps } from "./types";
 
-export function Dropdown(props: DropDownProps) {
+const Dropdown = (props: DropDownProps): React.ReactElement => {
   const {
     options,
     value,
@@ -40,29 +40,30 @@ export function Dropdown(props: DropDownProps) {
   return (
     <div className={clsx("relative gap-3 w-full flex items-center", className)}>
       <p className="whitespace-nowrap shrink-0">{label ? label : "label"}</p>
-      <>
-        <DropdownTrigger
-          outlined={outlined}
-          ref={triggerRef}
-          labels={selectedLabels}
-          onClick={dropdown.toggle}
-          onDeselect={dropdown.deselect}
-          multiple={multiple}
-        />
 
-        <DropdownMenu
-          menuRef={menuRef}
-          anchorRef={triggerRef}
-          options={options}
-          selectedValues={dropdown.selectedValues}
-          isOpen={dropdown.isOpen}
-          multiple={multiple}
-          searchable={searchable}
-          usePortal={usePortal}
-          renderOption={renderOption}
-          onSelect={dropdown.selectValue}
-        />
-      </>
+      <DropdownTrigger
+        outlined={outlined}
+        ref={triggerRef}
+        labels={selectedLabels}
+        onClick={dropdown.toggle}
+        onDeselect={dropdown.deselect}
+        multiple={multiple}
+      />
+
+      <DropdownMenu
+        menuRef={menuRef}
+        anchorRef={triggerRef}
+        options={options}
+        selectedValues={dropdown.selectedValues}
+        isOpen={dropdown.isOpen}
+        multiple={multiple}
+        searchable={searchable}
+        usePortal={usePortal}
+        renderOption={renderOption}
+        onSelect={dropdown.selectValue}
+      />
     </div>
   );
-}
+};
+
+export default Dropdown;

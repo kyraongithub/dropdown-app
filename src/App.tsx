@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dropdown } from "./components/UI/Dropdown";
+import Dropdown from "./components/UI/Dropdown";
 
 function App() {
   const [value, setValue] = useState<string[]>([]);

@@ -1,6 +1,3 @@
-export { Dropdown } from "./Dropdown";
-export type {
-  DropDownProps,
-  DropdownOptions,
-  RenderOptionState,
-} from "./types";
+import Dropdown from "./Dropdown";
+
+export default Dropdown;

@@ -1,9 +1,9 @@
 import { useLayoutEffect, useState } from "react";
 
-export function useFloatingPosition(
+export const useFloatingPosition = (
   anchorRef: React.RefObject<HTMLElement | null>,
   open: boolean,
-) {
+): React.CSSProperties => {
   const [style, setStyle] = useState<React.CSSProperties>({});
 
   useLayoutEffect(() => {
@@ -21,4 +21,4 @@ export function useFloatingPosition(
   }, [open, anchorRef]);
 
   return style;
-}
+};

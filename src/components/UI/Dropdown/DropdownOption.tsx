@@ -1,13 +1,10 @@
 import clsx from "clsx";
-import { type DropdownOptionItemProps } from "./types";
+import type { DropdownOptionItemProps } from "./types";
 
-export function DropdownOptionItem({
-  option,
-  selected,
-  highlighted,
-  onClick,
-  renderOption,
-}: DropdownOptionItemProps & { highlighted?: boolean }) {
+type Props = DropdownOptionItemProps & { highlighted?: boolean };
+
+const DropdownOptionItem = (props: Props): React.ReactElement => {
+  const { option, selected, highlighted, onClick, renderOption } = props;
   const disabled = option.disabled;
 
   return (
@@ -25,4 +22,6 @@ export function DropdownOptionItem({
         : option.label}
     </li>
   );
-}
+};
+
+export default DropdownOptionItem;

@@ -7,11 +7,11 @@ import {
   autoUpdate,
 } from "@floating-ui/dom";
 
-export function useDropdownPosition(
+const useDropdownPosition = (
   anchorRef: React.RefObject<HTMLElement | null>,
   menuRef: React.RefObject<HTMLElement | null>,
   active: boolean,
-) {
+) => {
   const [styles, setStyles] = useState<React.CSSProperties>({});
 
   useLayoutEffect(() => {
@@ -35,4 +35,6 @@ export function useDropdownPosition(
   }, [anchorRef, menuRef, active]);
 
   return styles;
-}
+};
+
+export default useDropdownPosition;
