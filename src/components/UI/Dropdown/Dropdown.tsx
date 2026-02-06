@@ -18,6 +18,7 @@ export function Dropdown(props: DropDownProps) {
     renderOption,
     className,
     label,
+    outlined = true,
   } = props;
 
   const triggerRef = useRef<HTMLButtonElement | null>(null);
@@ -41,10 +42,12 @@ export function Dropdown(props: DropDownProps) {
       <p className="whitespace-nowrap shrink-0">{label ? label : "label"}</p>
       <>
         <DropdownTrigger
+          outlined={outlined}
           ref={triggerRef}
           labels={selectedLabels}
           onClick={dropdown.toggle}
           onDeselect={dropdown.deselect}
+          multiple={multiple}
         />
 
         <DropdownMenu

@@ -21,6 +21,7 @@ export type DropDownProps = {
   searchable?: boolean;
   usePortal?: boolean;
   placeholder?: string;
+  outlined?: boolean;
   renderOption?: (
     option: DropdownOptions,
     state: RenderOptionState,

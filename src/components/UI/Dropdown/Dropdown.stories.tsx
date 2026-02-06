@@ -14,6 +14,23 @@ const options: DropdownOptions[] = [
 const meta: Meta<typeof Dropdown> = {
   title: "UI/Dropdown",
   component: Dropdown,
+  argTypes: {
+    label: {
+      control: "text",
+    },
+    outlined: {
+      control: "boolean",
+    },
+    multiple: {
+      control: "boolean",
+    },
+    searchable: {
+      control: "boolean",
+    },
+    options: {
+      control: "object",
+    },
+  },
 };
 
 export default meta;
@@ -23,12 +40,11 @@ export const Single: Story = {
     const [value, setValue] = useState<string>("");
 
     return (
-      <div className="w-64">
+      <div className="w-lg">
         <Dropdown
           options={options}
           value={value}
           onChange={(e) => setValue(e[0])}
-          placeholder="Select option"
         />
       </div>
     );
@@ -39,13 +55,12 @@ export const Multiple: Story = {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-      <div className="w-64">
+      <div className="w-lg">
         <Dropdown
           multiple
           options={options}
           value={value}
-          onChange={(e: any) => setValue(e[0])}
-          placeholder="Select options"
+          onChange={(e) => setValue(e as string[])}
         />
       </div>
     );
@@ -56,7 +71,7 @@ export const Searchable: Story = {
     const [value, setValue] = useState<string>("");
 
     return (
-      <div className="w-64">
+      <div className="w-lg">
         <Dropdown
           searchable
           options={options}
@@ -68,25 +83,35 @@ export const Searchable: Story = {
   },
 };
 export const CustomOption: Story = {
-  render: () => {
+  render: (args) => {
     const [value, setValue] = useState<string[]>([]);
 
     return (
-      <div className="w-64">
+      <div className="w-lg">
         <Dropdown
-          multiple
-          searchable
-          options={options}
+          multiple={args.multiple}
+          searchable={args.searchable}
+          options={args.options || options}
           value={value}
-          onChange={(e: any) => setValue(e[0])}
-          renderOption={(option, state) => (
+          outlined={args.outlined}
+          label={args.label}
+          onChange={(e: any) =>
+            setValue(args.multiple ? (e as string[]) : e[0])
+          }
+          renderOption={(option) => (
             <div className="flex justify-between">
               <span>{option.label}</span>
-              {state.selected && <span>✓</span>}
             </div>
           )}
         />
       </div>
     );
+  },
+  args: {
+    label: "Custom Option",
+    multiple: true,
+    searchable: true,
+    outlined: true,
+    options,
   },
 };
